@@ -52,3 +52,4 @@ static3==0.7.0
 url-normalize==1.4.3
 urllib3==1.26.7
 zipp==3.6.0
+django-multiselectfield==0.1.12
