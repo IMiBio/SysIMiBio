@@ -1,10 +1,11 @@
 from django.db import models
 from djgeojson.fields import PointField
-#TODO analizar modelo con requisitos TDWC: https://dwc.tdwg.org/terms/
+
+# TODO analizar modelo con requisitos TDWC: https://dwc.tdwg.org/terms/
 
 
 class ImibioOccurrence(models.Model):
-    #author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     gbifID = models.BigIntegerField(blank=True, null=True)
     abstract = models.TextField(blank=True, null=True)
     accessRights = models.TextField(blank=True, null=True)
@@ -248,13 +249,16 @@ class ImibioOccurrence(models.Model):
     geom = PointField()
 
     class Meta:
-        verbose_name_plural = 'Ocorrencias'
-        verbose_name = 'Ocurrencia'
-        ordering = ('-created_at',)
+        verbose_name_plural = "Ocorrencias"
+        verbose_name = "Ocurrencia"
+        ordering = ("-created_at",)
 
     def __str__(self):
         return self.scientificName
 
     def save(self, *args, **kwargs):
-        self.geom = {'type': 'Point', 'coordinates': [self.decimalLongitude, self.decimalLatitude]}
+        self.geom = {
+            "type": "Point",
+            "coordinates": [self.decimalLongitude, self.decimalLatitude],
+        }
         super(ImibioOccurrence, self).save(*args, **kwargs)

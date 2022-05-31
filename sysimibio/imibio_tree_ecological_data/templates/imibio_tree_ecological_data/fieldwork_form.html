@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+<!-- todo configurar crispy para organizar los campos -->
+{% block content %}
+
+<div class="jumbotron">
+    <div class="container">
+        <a role="button" class="btn btn-success btn-lg" href="{% url 'imibio_tree_ecological_data:field_list' %}">
+            <span class="align-middle">Volver</span>
+        </a>
+        <h2>Registro de visitas a campo</h2>
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+        <div class="alert alert-danger" role="alert">
+            <p>{{ message }}</p>
+        </div>
+        {% else %}
+        <div class="alert alert-success" role="alert">
+            <p>{{ message }}</p>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+        <div class="accordion" id="accordionExample">
+            <form method="POST" action="." class="post-form">
+                {% csrf_token %}
+
+                {% crispy form %}
+
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

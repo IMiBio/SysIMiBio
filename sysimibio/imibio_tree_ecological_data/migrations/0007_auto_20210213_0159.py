@@ -6,79 +6,100 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('imibio_tree_ecological_data', '0006_auto_20210212_2059'),
+        ("imibio_tree_ecological_data", "0006_auto_20210212_2059"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='tree',
-            options={'verbose_name': 'Árbol', 'verbose_name_plural': 'Árboles'},
+            name="tree",
+            options={"verbose_name": "Árbol", "verbose_name_plural": "Árboles"},
         ),
         migrations.RemoveField(
-            model_name='tree',
-            name='life_form',
+            model_name="tree",
+            name="life_form",
         ),
         migrations.RemoveField(
-            model_name='treeecologicaldata',
-            name='dab',
+            model_name="treeecologicaldata",
+            name="dab",
         ),
         migrations.RemoveField(
-            model_name='treeecologicaldata',
-            name='dap',
+            model_name="treeecologicaldata",
+            name="dap",
         ),
         migrations.RemoveField(
-            model_name='treeecologicaldata',
-            name='latitude',
+            model_name="treeecologicaldata",
+            name="latitude",
         ),
         migrations.RemoveField(
-            model_name='treeecologicaldata',
-            name='life_form',
+            model_name="treeecologicaldata",
+            name="life_form",
         ),
         migrations.RemoveField(
-            model_name='treeecologicaldata',
-            name='longitude',
+            model_name="treeecologicaldata",
+            name="longitude",
         ),
         migrations.RemoveField(
-            model_name='treeecologicaldata',
-            name='obs',
+            model_name="treeecologicaldata",
+            name="obs",
         ),
         migrations.RemoveField(
-            model_name='treeecologicaldata',
-            name='photo',
+            model_name="treeecologicaldata",
+            name="photo",
         ),
         migrations.RemoveField(
-            model_name='treeecologicaldata',
-            name='sociological_classification',
+            model_name="treeecologicaldata",
+            name="sociological_classification",
         ),
         migrations.RemoveField(
-            model_name='treeecologicaldata',
-            name='specie',
+            model_name="treeecologicaldata",
+            name="specie",
         ),
         migrations.RemoveField(
-            model_name='treeecologicaldata',
-            name='tree_height',
+            model_name="treeecologicaldata",
+            name="tree_height",
         ),
         migrations.RemoveField(
-            model_name='treeecologicaldata',
-            name='tree_id',
+            model_name="treeecologicaldata",
+            name="tree_id",
         ),
         migrations.RemoveField(
-            model_name='treeecologicaldata',
-            name='tree_status',
+            model_name="treeecologicaldata",
+            name="tree_status",
         ),
         migrations.AddField(
-            model_name='tree',
-            name='phytosanitary_status',
-            field=models.CharField(choices=[('Bueno', 'Bueno'), ('Regular', 'Regular'), ('Malo', 'Malo'), ('Muerto', 'Muerto')], default='Bueno', max_length=100),
+            model_name="tree",
+            name="phytosanitary_status",
+            field=models.CharField(
+                choices=[
+                    ("Bueno", "Bueno"),
+                    ("Regular", "Regular"),
+                    ("Malo", "Malo"),
+                    ("Muerto", "Muerto"),
+                ],
+                default="Bueno",
+                max_length=100,
+            ),
         ),
         migrations.AlterField(
-            model_name='tree',
-            name='sociological_classification',
-            field=models.CharField(choices=[('Emergente', 'Emergente'), ('Dominante', 'Dominante'), ('Codominante', 'Codominante'), ('Intermedia', 'Intermedia'), ('Inferior suprimido', 'Inferior Suprimido'), ('Inferior sumergido', 'Supeior Sumergido')], default='Emergente', max_length=100, verbose_name='clasificación sociologica'),
+            model_name="tree",
+            name="sociological_classification",
+            field=models.CharField(
+                choices=[
+                    ("Emergente", "Emergente"),
+                    ("Dominante", "Dominante"),
+                    ("Codominante", "Codominante"),
+                    ("Intermedia", "Intermedia"),
+                    ("Inferior suprimido", "Inferior Suprimido"),
+                    ("Inferior sumergido", "Supeior Sumergido"),
+                ],
+                default="Emergente",
+                max_length=100,
+                verbose_name="clasificación sociologica",
+            ),
         ),
         migrations.AlterField(
-            model_name='tree',
-            name='tree_status',
+            model_name="tree",
+            name="tree_status",
             field=models.CharField(max_length=100),
         ),
     ]

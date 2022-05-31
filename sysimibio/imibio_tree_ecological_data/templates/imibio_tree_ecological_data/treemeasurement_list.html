@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br>
+<div class="col-md-8">
+    {% if user.is_authenticated %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        <p>{{ message }}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="row">
+        <h2>Lista de mediciones de árboles</h2>
+    </div>
+    <div
+    <br>
+<div class="row">
+    <div class="col-sm">
+        <form method="get">
+            {{ filter.form }}
+            <button type="submit" class="btn btn-primary" > Filtrar </button>
+        </form>
+    </div>
+    </div>
+    {% if object_list %}
+    <br>
+    <table class='table table-striped'>
+        <thead>
+        <tr>
+            <th>ID del árbol</th>
+            <th>Nombre Científico</th>
+            <th>Fecha de la medición</th>
+            <th>Responsable</th>
+            <th>Parcela Permanente</th>
+            <th>Subparcela</th>
+
+        </tr>
+        </thead>
+
+        {% for object in filter.qs %}
+        <tr>
+            <td>
+                <a href="{{ object.get_absolute_url }}">{{ object.tree.tree_id }}</a>
+            </td>
+            <td>{{ object.tree.specie }}</td>
+            <td>{{ object.field.date }}</td>
+            <td>{{ object.field.coordinator }}</td>
+            <td>{{ object.field.parcel_id.name }}</td>
+            <td>{{ object.tree.subplot }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p class="alert alert-warning">
+        <i class="fa fa-warning"></i> Base de datos sin registros!</p>
+    {% endif %}
+</div>
+{% else %}
+<div class="alert alert-danger" role="alert">
+    Acceso negado. Logar o crear usuário.
+</div>
+
+{% endif %}
+{% endblock %}

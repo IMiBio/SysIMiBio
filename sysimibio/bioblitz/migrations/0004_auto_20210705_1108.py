@@ -6,18 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('bioblitz', '0003_auto_20210605_1548'),
+        ("bioblitz", "0003_auto_20210605_1548"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='bioblitzoccurrence',
-            name='iconic_taxon_name',
-            field=models.CharField(blank=True, default='', max_length=50, verbose_name='Grupo'),
+            model_name="bioblitzoccurrence",
+            name="iconic_taxon_name",
+            field=models.CharField(
+                blank=True, default="", max_length=50, verbose_name="Grupo"
+            ),
         ),
         migrations.AlterField(
-            model_name='bioblitzproject',
-            name='project_slug',
-            field=models.CharField(help_text='(Nombre sin espacio. Con guión)', max_length=250, verbose_name='Nombre del proyecto'),
+            model_name="bioblitzproject",
+            name="project_slug",
+            field=models.CharField(
+                help_text="(Nombre sin espacio. Con guión)",
+                max_length=250,
+                verbose_name="Nombre del proyecto",
+            ),
         ),
     ]

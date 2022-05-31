@@ -7,20 +7,22 @@ from sysimibio.bibliography.models import Publication
 
 class PublicationDetail(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username="myusername", password="password", email="abc@testmail.com")
-        self.client.login(username='myusername', password='password')
-        self.publication1 = Publication.objects.create(
-            ISBN='9780300206111',
-            imibio=False,
-            created_by=self.user
+        self.user = User.objects.create_user(
+            username="myusername", password="password", email="abc@testmail.com"
         )
-        self.resp = self.client.get(r('bibliography:publication_detail', self.publication1.pk), follow=True)
+        self.client.login(username="myusername", password="password")
+        self.publication1 = Publication.objects.create(
+            ISBN="9780300206111", imibio=False, created_by=self.user
+        )
+        self.resp = self.client.get(
+            r("bibliography:publication_detail", self.publication1.pk), follow=True
+        )
 
     def test_get(self):
         self.assertEqual(200, self.resp.status_code)
 
     def test_template(self):
-        self.assertTemplateUsed(self.resp, 'bibliography/publication_detail.html')
+        self.assertTemplateUsed(self.resp, "bibliography/publication_detail.html")
 
     # def test_html(self):
     #     content = [
@@ -36,9 +38,11 @@ class PublicationDetail(TestCase):
 
 class PublicationDetailNotFound(TestCase):
     def setUp(self):
-        User.objects.create_user(username="myusername", password="password", email="abc@testmail.com")
-        self.client.login(username='myusername', password='password')
-        self.resp = self.client.get(r('bibliography:publication_detail', 0))
+        User.objects.create_user(
+            username="myusername", password="password", email="abc@testmail.com"
+        )
+        self.client.login(username="myusername", password="password")
+        self.resp = self.client.get(r("bibliography:publication_detail", 0))
 
     def test_not_found(self):
         self.assertEqual(404, self.resp.status_code)

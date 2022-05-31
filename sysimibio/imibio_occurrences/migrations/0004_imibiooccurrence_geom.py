@@ -7,13 +7,13 @@ import djgeojson.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('imibio_occurrences', '0003_auto_20201208_1859'),
+        ("imibio_occurrences", "0003_auto_20201208_1859"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='imibiooccurrence',
-            name='geom',
+            model_name="imibiooccurrence",
+            name="geom",
             field=djgeojson.fields.PointField(default=[0, 0]),
             preserve_default=False,
         ),

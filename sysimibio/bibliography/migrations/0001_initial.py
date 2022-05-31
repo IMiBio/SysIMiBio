@@ -17,43 +17,166 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Publication',
+            name="Publication",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('publication_year', models.CharField(blank=True, help_text='YYYY', max_length=4, verbose_name='Año de publicación')),
-                ('title', models.CharField(blank=True, max_length=255, verbose_name='Título')),
-                ('author', models.CharField(blank=True, max_length=255, verbose_name='Autor')),
-                ('DOI', models.CharField(blank=True, max_length=30, validators=[sysimibio.bibliography.validators.validate_doi_prefix, sysimibio.bibliography.validators.validate_doi_slash], verbose_name='DOI')),
-                ('ISBN', models.CharField(blank=True, help_text='Ingresar ISBN sin guion ni puntos', max_length=13, validators=[sysimibio.bibliography.validators.validate_isbn], verbose_name='ISBN')),
-                ('subject', models.CharField(blank=True, max_length=200, verbose_name='Palabras clave o tema')),
-                ('ORCID', models.URLField(blank=True, verbose_name='ORCID (opcional)')),
-                ('URL', models.URLField(blank=True, verbose_name='URL (opcional)')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Fecha creación')),
-                ('last_modification_at', models.DateTimeField(auto_now=True, verbose_name='Ultima modificación')),
-                ('observations', models.TextField(blank=True, verbose_name='Observaciones')),
-                ('imibio', models.BooleanField(default=False, verbose_name='Participación IMIBIO ?')),
-                ('crossref', models.BooleanField(default=True, help_text='Si tiene referencias con DOI O ISBN marcar.', verbose_name='Tiene DOI/ISBN ?')),
-                ('created_by', models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ("id", models.AutoField(primary_key=True, serialize=False)),
+                (
+                    "publication_year",
+                    models.CharField(
+                        blank=True,
+                        help_text="YYYY",
+                        max_length=4,
+                        verbose_name="Año de publicación",
+                    ),
+                ),
+                (
+                    "title",
+                    models.CharField(blank=True, max_length=255, verbose_name="Título"),
+                ),
+                (
+                    "author",
+                    models.CharField(blank=True, max_length=255, verbose_name="Autor"),
+                ),
+                (
+                    "DOI",
+                    models.CharField(
+                        blank=True,
+                        max_length=30,
+                        validators=[
+                            sysimibio.bibliography.validators.validate_doi_prefix,
+                            sysimibio.bibliography.validators.validate_doi_slash,
+                        ],
+                        verbose_name="DOI",
+                    ),
+                ),
+                (
+                    "ISBN",
+                    models.CharField(
+                        blank=True,
+                        help_text="Ingresar ISBN sin guion ni puntos",
+                        max_length=13,
+                        validators=[sysimibio.bibliography.validators.validate_isbn],
+                        verbose_name="ISBN",
+                    ),
+                ),
+                (
+                    "subject",
+                    models.CharField(
+                        blank=True, max_length=200, verbose_name="Palabras clave o tema"
+                    ),
+                ),
+                ("ORCID", models.URLField(blank=True, verbose_name="ORCID (opcional)")),
+                ("URL", models.URLField(blank=True, verbose_name="URL (opcional)")),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Fecha creación"
+                    ),
+                ),
+                (
+                    "last_modification_at",
+                    models.DateTimeField(
+                        auto_now=True, verbose_name="Ultima modificación"
+                    ),
+                ),
+                (
+                    "observations",
+                    models.TextField(blank=True, verbose_name="Observaciones"),
+                ),
+                (
+                    "imibio",
+                    models.BooleanField(
+                        default=False, verbose_name="Participación IMIBIO ?"
+                    ),
+                ),
+                (
+                    "crossref",
+                    models.BooleanField(
+                        default=True,
+                        help_text="Si tiene referencias con DOI O ISBN marcar.",
+                        verbose_name="Tiene DOI/ISBN ?",
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.ForeignKey(
+                        default="",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='SpeciesList',
+            name="SpeciesList",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('scientific_name', models.CharField(max_length=50, verbose_name='Nombre científico')),
-                ('other_fields_json', models.JSONField(default=dict)),
-                ('publication', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='bibliography.publication')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "scientific_name",
+                    models.CharField(max_length=50, verbose_name="Nombre científico"),
+                ),
+                ("other_fields_json", models.JSONField(default=dict)),
+                (
+                    "publication",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="bibliography.publication",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='OccurrenceList',
+            name="OccurrenceList",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('scientific_name', models.CharField(blank=True, max_length=50, verbose_name='Nombre científico')),
-                ('latitude', models.FloatField(validators=[sysimibio.imibio_tree_ecological_data.validators.validate_lat], verbose_name='Latitud')),
-                ('longitude', models.FloatField(validators=[sysimibio.imibio_tree_ecological_data.validators.validate_lon], verbose_name='Longitud')),
-                ('other_fields_json', models.JSONField(default=dict)),
-                ('publication', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='bibliography.publication')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "scientific_name",
+                    models.CharField(
+                        blank=True, max_length=50, verbose_name="Nombre científico"
+                    ),
+                ),
+                (
+                    "latitude",
+                    models.FloatField(
+                        validators=[
+                            sysimibio.imibio_tree_ecological_data.validators.validate_lat
+                        ],
+                        verbose_name="Latitud",
+                    ),
+                ),
+                (
+                    "longitude",
+                    models.FloatField(
+                        validators=[
+                            sysimibio.imibio_tree_ecological_data.validators.validate_lon
+                        ],
+                        verbose_name="Longitud",
+                    ),
+                ),
+                ("other_fields_json", models.JSONField(default=dict)),
+                (
+                    "publication",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="bibliography.publication",
+                    ),
+                ),
             ],
         ),
     ]

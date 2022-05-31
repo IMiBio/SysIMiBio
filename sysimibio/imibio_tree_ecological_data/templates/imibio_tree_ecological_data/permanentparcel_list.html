@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+<div class="col-md-8">
+    {% if user.is_authenticated %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        <p>{{ message }}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="row">
+        <h2>Lista Parcelas Permanentes</h2>
+    </div>
+    {% if object_list %}
+    <table class='table table-striped'>
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Responsable</th>
+            <th>Municipio</th>
+            <th>Lugar</th>
+            <th>Fecha de creación</th>
+        </tr>
+        </thead>
+
+        {% for object in object_list %}
+        <tr>
+            <td>
+                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+            </td>
+            <td>{{ object.coordinator }}</td>
+            <td>{{ object.municipality }}</td>
+            <td>{{ object.locality }}</td>
+            <td>{{ object.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p class="alert alert-warning">
+        <i class="fa fa-warning"></i> Base de datos sin registros!</p>
+    {% endif %}
+</div>
+{% else %}
+<div class="alert alert-danger" role="alert">
+    Acceso negado. Logar o crear usuário.
+</div>
+
+{% endif %}
+{% endblock %}

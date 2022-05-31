@@ -7,18 +7,18 @@ import djgeojson.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('imibio_tree_ecological_data', '0009_auto_20210308_0159'),
+        ("imibio_tree_ecological_data", "0009_auto_20210308_0159"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='tree',
-            name='geom',
+            model_name="tree",
+            name="geom",
             field=djgeojson.fields.PointField(blank=True),
         ),
         migrations.AlterField(
-            model_name='tree',
-            name='tree_status',
+            model_name="tree",
+            name="tree_status",
             field=models.CharField(max_length=100, null=True),
         ),
     ]

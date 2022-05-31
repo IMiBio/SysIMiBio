@@ -11,90 +11,240 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('imibio_tree_ecological_data', '0013_auto_20210330_1207'),
+        ("imibio_tree_ecological_data", "0013_auto_20210330_1207"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='PermanentParcel',
+            name="PermanentParcel",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50, verbose_name='Nombre de la parcela')),
-                ('province', models.CharField(choices=[('Misiones', 'Misiones')], max_length=10, verbose_name='Provincia')),
-                ('municipality', models.CharField(max_length=50, verbose_name='Municipio')),
-                ('locality', models.CharField(max_length=50, verbose_name='Localidad')),
-                ('obs', models.TextField(verbose_name='Obervaciones')),
-                ('latitude', models.FloatField(blank=True, help_text='informar en formato graus decimais WGS84', validators=[sysimibio.imibio_tree_ecological_data.validators.validate_lat], verbose_name='latitud')),
-                ('longitude', models.FloatField(blank=True, help_text='informar en formato graus decimais WGS84', validators=[sysimibio.imibio_tree_ecological_data.validators.validate_lon], verbose_name='longitud')),
-                ('geom', djgeojson.fields.PolygonField(blank=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=50, verbose_name="Nombre de la parcela"
+                    ),
+                ),
+                (
+                    "province",
+                    models.CharField(
+                        choices=[("Misiones", "Misiones")],
+                        max_length=10,
+                        verbose_name="Provincia",
+                    ),
+                ),
+                (
+                    "municipality",
+                    models.CharField(max_length=50, verbose_name="Municipio"),
+                ),
+                ("locality", models.CharField(max_length=50, verbose_name="Localidad")),
+                ("obs", models.TextField(verbose_name="Obervaciones")),
+                (
+                    "latitude",
+                    models.FloatField(
+                        blank=True,
+                        help_text="informar en formato graus decimais WGS84",
+                        validators=[
+                            sysimibio.imibio_tree_ecological_data.validators.validate_lat
+                        ],
+                        verbose_name="latitud",
+                    ),
+                ),
+                (
+                    "longitude",
+                    models.FloatField(
+                        blank=True,
+                        help_text="informar en formato graus decimais WGS84",
+                        validators=[
+                            sysimibio.imibio_tree_ecological_data.validators.validate_lon
+                        ],
+                        verbose_name="longitud",
+                    ),
+                ),
+                ("geom", djgeojson.fields.PolygonField(blank=True)),
             ],
             options={
-                'verbose_name': 'Parcela Permanente',
-                'verbose_name_plural': 'Parcelas Permanentes',
+                "verbose_name": "Parcela Permanente",
+                "verbose_name_plural": "Parcelas Permanentes",
             },
         ),
         migrations.AlterField(
-            model_name='pictures',
-            name='picture',
-            field=models.ImageField(blank=True, help_text='Choose foto', null=True, upload_to='', verbose_name='Fotografía'),
+            model_name="pictures",
+            name="picture",
+            field=models.ImageField(
+                blank=True,
+                help_text="Choose foto",
+                null=True,
+                upload_to="",
+                verbose_name="Fotografía",
+            ),
         ),
         migrations.AlterField(
-            model_name='tree',
-            name='dab',
-            field=models.FloatField(help_text='cm', verbose_name='DAB'),
+            model_name="tree",
+            name="dab",
+            field=models.FloatField(help_text="cm", verbose_name="DAB"),
         ),
         migrations.AlterField(
-            model_name='tree',
-            name='dap',
-            field=models.FloatField(help_text='cm', verbose_name='DAP'),
+            model_name="tree",
+            name="dap",
+            field=models.FloatField(help_text="cm", verbose_name="DAP"),
         ),
         migrations.AlterField(
-            model_name='tree',
-            name='latitude',
-            field=models.FloatField(help_text='informar en formato graus decimais WGS84', validators=[sysimibio.imibio_tree_ecological_data.validators.validate_lat], verbose_name='latitud'),
+            model_name="tree",
+            name="latitude",
+            field=models.FloatField(
+                help_text="informar en formato graus decimais WGS84",
+                validators=[
+                    sysimibio.imibio_tree_ecological_data.validators.validate_lat
+                ],
+                verbose_name="latitud",
+            ),
         ),
         migrations.AlterField(
-            model_name='tree',
-            name='longitude',
-            field=models.FloatField(validators=[sysimibio.imibio_tree_ecological_data.validators.validate_lon], verbose_name='longitud'),
+            model_name="tree",
+            name="longitude",
+            field=models.FloatField(
+                validators=[
+                    sysimibio.imibio_tree_ecological_data.validators.validate_lon
+                ],
+                verbose_name="longitud",
+            ),
         ),
         migrations.AlterField(
-            model_name='tree',
-            name='picture',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='imibio_tree_ecological_data.pictures'),
+            model_name="tree",
+            name="picture",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="imibio_tree_ecological_data.pictures",
+            ),
         ),
         migrations.AlterField(
-            model_name='tree',
-            name='tree_height',
-            field=models.FloatField(help_text='m', validators=[sysimibio.imibio_tree_ecological_data.validators.tree_height_validation], verbose_name='Altura del árbol'),
+            model_name="tree",
+            name="tree_height",
+            field=models.FloatField(
+                help_text="m",
+                validators=[
+                    sysimibio.imibio_tree_ecological_data.validators.tree_height_validation
+                ],
+                verbose_name="Altura del árbol",
+            ),
         ),
         migrations.CreateModel(
-            name='FieldWork',
+            name="FieldWork",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateField(help_text='ej.: AAAA-MM-DD', validators=[sysimibio.imibio_tree_ecological_data.validators.validate_date], verbose_name='fecha')),
-                ('start_time', models.TimeField(help_text='ej.: 12:30', verbose_name='hora_inicio')),
-                ('end_time', models.TimeField(help_text='ej.: 13:00', verbose_name='hora_final')),
-                ('temperature', models.FloatField(help_text='°C', validators=[sysimibio.imibio_tree_ecological_data.validators.validate_temperature], verbose_name='temperatura')),
-                ('humidity', models.FloatField(help_text='%', validators=[sysimibio.imibio_tree_ecological_data.validators.validate_humidity], verbose_name='humedad')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Fecha creación')),
-                ('last_modification_at', models.DateTimeField(auto_now=True, verbose_name='Ultima modificación')),
-                ('coordinator', models.ForeignKey(max_length=100, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='responsable')),
-                ('parcel_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='imibio_tree_ecological_data.permanentparcel', verbose_name='Parcela Permanente')),
-                ('staff', models.ManyToManyField(max_length=100, related_name='staff', to=settings.AUTH_USER_MODEL, verbose_name='acompanantes')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "date",
+                    models.DateField(
+                        help_text="ej.: AAAA-MM-DD",
+                        validators=[
+                            sysimibio.imibio_tree_ecological_data.validators.validate_date
+                        ],
+                        verbose_name="fecha",
+                    ),
+                ),
+                (
+                    "start_time",
+                    models.TimeField(
+                        help_text="ej.: 12:30", verbose_name="hora_inicio"
+                    ),
+                ),
+                (
+                    "end_time",
+                    models.TimeField(help_text="ej.: 13:00", verbose_name="hora_final"),
+                ),
+                (
+                    "temperature",
+                    models.FloatField(
+                        help_text="°C",
+                        validators=[
+                            sysimibio.imibio_tree_ecological_data.validators.validate_temperature
+                        ],
+                        verbose_name="temperatura",
+                    ),
+                ),
+                (
+                    "humidity",
+                    models.FloatField(
+                        help_text="%",
+                        validators=[
+                            sysimibio.imibio_tree_ecological_data.validators.validate_humidity
+                        ],
+                        verbose_name="humedad",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Fecha creación"
+                    ),
+                ),
+                (
+                    "last_modification_at",
+                    models.DateTimeField(
+                        auto_now=True, verbose_name="Ultima modificación"
+                    ),
+                ),
+                (
+                    "coordinator",
+                    models.ForeignKey(
+                        max_length=100,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="responsable",
+                    ),
+                ),
+                (
+                    "parcel_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="imibio_tree_ecological_data.permanentparcel",
+                        verbose_name="Parcela Permanente",
+                    ),
+                ),
+                (
+                    "staff",
+                    models.ManyToManyField(
+                        max_length=100,
+                        related_name="staff",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="acompanantes",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Campo',
-                'verbose_name_plural': 'Registros de campo',
-                'ordering': ('-date',),
+                "verbose_name": "Campo",
+                "verbose_name_plural": "Registros de campo",
+                "ordering": ("-date",),
             },
         ),
         migrations.AlterField(
-            model_name='tree',
-            name='field',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='imibio_tree_ecological_data.fieldwork'),
+            model_name="tree",
+            name="field",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="imibio_tree_ecological_data.fieldwork",
+            ),
         ),
         migrations.DeleteModel(
-            name='TreeEcologicalData',
+            name="TreeEcologicalData",
         ),
     ]

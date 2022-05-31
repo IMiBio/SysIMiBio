@@ -7,18 +7,21 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('imibio_tree_ecological_data', '0011_auto_20210326_1417'),
+        ("imibio_tree_ecological_data", "0011_auto_20210326_1417"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='tree',
-            name='photo',
-            field=models.URLField(blank=True, null=True, verbose_name='fotografia'),
+            model_name="tree",
+            name="photo",
+            field=models.URLField(blank=True, null=True, verbose_name="fotografia"),
         ),
         migrations.AlterField(
-            model_name='tree',
-            name='picture',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='imibio_tree_ecological_data.pictures'),
+            model_name="tree",
+            name="picture",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="imibio_tree_ecological_data.pictures",
+            ),
         ),
     ]

@@ -21,13 +21,17 @@ from django.urls import path, include
 from sysimibio.core.views import home
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('accounts/', include('sysimibio.accounts.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
-
-    path('', home, name='home'),
-    path('imibio_occurrences/', include('sysimibio.imibio_occurrences.urls')), # todo cambiar a ingles
-    path('imibio_tree_ecological_data/', include('sysimibio.imibio_tree_ecological_data.urls')), # todo cambiar a ingles
-    path('bioblitz/', include('sysimibio.bioblitz.urls')),
-    path('bibliography/', include('sysimibio.bibliography.urls')),
+    path("admin/", admin.site.urls),
+    path("accounts/", include("sysimibio.accounts.urls")),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("", home, name="home"),
+    path(
+        "imibio_occurrences/", include("sysimibio.imibio_occurrences.urls")
+    ),  # todo cambiar a ingles
+    path(
+        "imibio_tree_ecological_data/",
+        include("sysimibio.imibio_tree_ecological_data.urls"),
+    ),  # todo cambiar a ingles
+    path("bioblitz/", include("sysimibio.bioblitz.urls")),
+    path("bibliography/", include("sysimibio.bibliography.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

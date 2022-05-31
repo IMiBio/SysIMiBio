@@ -1,0 +1,57 @@
+
+{% extends 'base.html' %}
+<!--comentarios-->
+ {% block content %}
+
+<br>
+<div class="row">
+    <div class="col-sm">
+        <form method="get">
+            {{ filter.form }}
+            <button type="submit" class="btn btn-primary" > Filtrar </button>
+        </form>
+    </div>
+
+<br>
+    <table class = 'table table-striped'>
+                <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>AÑO</th>
+                    <th>ES IMIBIO</th>
+                    <th>TIPO</th>
+
+                </tr>
+
+                </thead>
+    {% for publication in publications %}
+        <tr>
+            <td>
+                <a href="{% url 'bibliography:publication_detail' pk=publication.pk %}"style="color:black;">{{ publication.title }}</a>
+            </td>
+            <td>
+               {{ publication.publication_year}}
+            </td>
+            <td>
+               {{ publication.imibio|yesno:"Si,No" }}
+            </td>
+            <td>
+                 {% if publication.DOI %}
+                  Articulo
+                 {% else %}
+                   Libro
+                 {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+ </table>
+
+
+
+
+
+<a  role="button" class="btn navbar-btn btn-primary" href="{% url 'bibliography:publication_new' %}">Agregar Publicacion</a>
+
+
+
+ {% endblock %}

@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+
+{% load leaflet_tags %}
+
+{% load static %}
+
+{% block js %}
+{% leaflet_js %}
+{% endblock %}
+
+{% block css %}
+{% leaflet_css %}
+{% endblock %}
+
+{% block content %}
+<style>
+    #map-detail {
+        width: 100%;
+        height: 100%;
+    }
+
+</style>
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success" role="alert">
+    <p>{{ message }}</p>
+</div>
+{% endfor %}
+{% endif %}
+
+
+<br>
+<div class="row">
+    <a role="button" class="btn btn-success btn-lg" href="{% url 'imibio_tree_ecological_data:plot_list' %}">
+        <span class="align-middle">Lista de Parcelas</span>
+    </a>
+    <a role="button" class="btn btn-warning btn-lg"
+       href="{% url 'imibio_tree_ecological_data:plot_edit' pk=object.pk %}">
+        <span class="align-middle">Editar Parcela</span>
+    </a>
+</div>
+    <h2>Detalles de la parcela: {{ object.name }}</h2>
+<div class="row">
+    <div class="col-sm-4">
+        <table class="table table-user-information">
+            <tbody>
+
+            <tr>
+                <th class="text-right">Nombre de la parcela</th>
+                <td>{{ object.name }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">Coordinador(a)</th>
+                <td>{{ object.coordinator }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">Provincia</th>
+                <td>{{ object.province }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">Municipio</th>
+                <td>{{ object.municipality }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">Lugar</th>
+                <td>{{ object.locality }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">Nomenclatura catastral</th>
+                <td>{{ object.cadastral_parcel }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">Tipo de parcela</th>
+
+                <td>{{ object.plot_type | join:" y "}}</td>
+
+            </tr>
+            <tr>
+                <th class="text-right">Fecha de creación</th>
+                <td>{{ object.created_at }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">Observaciones</th>
+                <td>{{ object.obs|linebreaks }}</td>
+
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="col-sm-8">
+        <div id="map-detail">
+            {% leaflet_map "map-detail" %}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="jumbotron">
+    <div class="col-fluid">
+        <h2>Lista Visitas de campo</h2>
+
+    <table class='table table-striped'>
+        <thead>
+        <tr>
+            <th>Parcela</th>
+            <th>Fecha</th>
+            <th>Inicio</th>
+            <th>Coordenador</th>
+            <th>Apoyo</th>
+
+        </tr>
+        </thead>
+
+        {% for field in field_list %}
+        <tr>
+            <td>
+                <a href="{{ field.get_absolute_url }}">{{ field }}</a>
+            </td>
+            <td>{{ field.date }}</td>
+            <td>{{ field.start_time }}</td>
+            <td>{{ field.coordinator }}</td>
+            <td>{{ field.staff.all|join:", " }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+    </div>
+    <div style="background:transparent" class="jumbotron">
+    <div class="col-fluid">
+        <h2>Lista individuos arbóreos</h2>
+
+    <table class='table table-striped'>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>specie</th>
+            <th>str</th>
+        </tr>
+        </thead>
+
+        {% for tree in tree_list %}
+        <tr>
+            <td>
+                <a href="{{ tree.get_absolute_url }}">{{ tree.tree_id }}</a>
+            </td>
+            <td>{{ tree.specie }}</td>
+            <td>{{ tree }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+    </div>
+</div>
+<div class="row">
+    <div style="background:transparent" class="jumbotron">
+    <div class="col-fluid">
+        <h2>Lista mediciones de árboles</h2>
+
+    <table class='table table-striped'>
+        <thead>
+        <tr>
+            <th>Medición</th>
+            <th>Árbol</th>
+            <th>Fecha</th>
+            <th>DAP</th>
+            <th>DAB</th>
+
+        </tr>
+        </thead>
+
+        {% for measure in measurement_list %}
+        <tr>
+            <td>
+                <a href="{{ measure.get_absolute_url }}">{{ measure }}</a>
+            </td>
+            <td>{{ measure.tree }}</td>
+            <td>{{ measure.created_at }}</td>
+            <td>{{ measure.dap }}</td>
+            <td>{{ measure.dab }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+    </div>
+</div>
+<script>
+      var dataurl = '{% url "imibio_tree_ecological_data:plot_detail_geojson" pk=object.pk %}';
+      window.addEventListener("map:init", function (event) {
+        var map = event.detail.map;
+        // Download GeoJSON data with Ajax
+        fetch(dataurl)
+          .then(function(resp) {
+            return resp.json();
+          })
+          .then(function(data) {
+            L.geoJson(data, {
+              onEachFeature: function onEachFeature(feature, layer) {
+                var props = feature.properties.popup_content;
+                layer.bindPopup(props);
+                 map.fitBounds(layer.getBounds(), { maxZoom: 15 });
+            }}).addTo(map);
+          });
+      });
+      var TreesPlotDetailGeoJson = '{% url "imibio_tree_ecological_data:trees_plot_detail_geojson" pk=object.pk %}';
+      window.addEventListener("map:init", function (event) {
+        var map = event.detail.map;
+        // Download GeoJSON data with Ajax
+        fetch(TreesPlotDetailGeoJson)
+          .then(function(resp) {
+            return resp.json();
+          })
+          .then(function(data) {
+            L.geoJson(data, {
+              onEachFeature: function onEachFeature(feature, layer) {
+                var props = feature.properties.popup_content;
+                layer.bindPopup(props);
+            }}).addTo(map);
+          });
+      });
+
+</script>
+
+
+{% endblock content %}

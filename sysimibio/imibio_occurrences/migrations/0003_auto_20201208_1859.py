@@ -6,83 +6,83 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('imibio_occurrences', '0002_auto_20201129_0344'),
+        ("imibio_occurrences", "0002_auto_20201129_0344"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='basisOfRecord',
+            model_name="imibiooccurrence",
+            name="basisOfRecord",
             field=models.TextField(),
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='catalogNumber',
+            model_name="imibiooccurrence",
+            name="catalogNumber",
             field=models.TextField(),
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='clase',
-            field=models.CharField(max_length=254, verbose_name='class'),
+            model_name="imibiooccurrence",
+            name="clase",
+            field=models.CharField(max_length=254, verbose_name="class"),
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='collectionCode',
+            model_name="imibiooccurrence",
+            name="collectionCode",
             field=models.TextField(),
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='county',
+            model_name="imibiooccurrence",
+            name="county",
             field=models.TextField(),
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='family',
+            model_name="imibiooccurrence",
+            name="family",
             field=models.TextField(),
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='genus',
+            model_name="imibiooccurrence",
+            name="genus",
             field=models.TextField(),
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='institutionCode',
+            model_name="imibiooccurrence",
+            name="institutionCode",
             field=models.TextField(),
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='kingdom',
+            model_name="imibiooccurrence",
+            name="kingdom",
             field=models.TextField(),
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='locality',
+            model_name="imibiooccurrence",
+            name="locality",
             field=models.TextField(),
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='municipality',
+            model_name="imibiooccurrence",
+            name="municipality",
             field=models.TextField(),
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='order',
+            model_name="imibiooccurrence",
+            name="order",
             field=models.TextField(),
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='phylum',
+            model_name="imibiooccurrence",
+            name="phylum",
             field=models.TextField(),
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='scientificName',
+            model_name="imibiooccurrence",
+            name="scientificName",
             field=models.TextField(),
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='stateProvince',
+            model_name="imibiooccurrence",
+            name="stateProvince",
             field=models.TextField(),
         ),
     ]

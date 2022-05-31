@@ -8,17 +8,22 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('imibio_tree_ecological_data', '0008_auto_20210213_0207'),
+        ("imibio_tree_ecological_data", "0008_auto_20210213_0207"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='treeecologicaldata',
-            name='staff',
+            model_name="treeecologicaldata",
+            name="staff",
         ),
         migrations.AddField(
-            model_name='treeecologicaldata',
-            name='staff',
-            field=models.ManyToManyField(max_length=100, related_name='staff', to=settings.AUTH_USER_MODEL, verbose_name='acompanantes'),
+            model_name="treeecologicaldata",
+            name="staff",
+            field=models.ManyToManyField(
+                max_length=100,
+                related_name="staff",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="acompanantes",
+            ),
         ),
     ]

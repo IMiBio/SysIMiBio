@@ -10,11 +10,11 @@ Items:
 * [Proceso de desarrollo](#Proceso-de-desarrollo)
 
 ## como desarrollar
-1. Haga un Clone del repositorio
-1. Crea un ambiente virtual env (python)
-1. Active el ambiente virtual env
+1. Haga un *clone* del repositorio
+1. Cree un ambiente virtual (python)
+1. Active el ambiente virtual
 1. Haga la instalación de las dependencias
-1. Configure la instancia com .env
+1. Configure la instancia com `.env`
 1. Ejecute los testes
 
 ```console
@@ -50,13 +50,12 @@ gut push heroku master --force
 #### Gestión de datos de biodiversidad:  
 * [Bioblitz](./README_bioblitz.md)  
 * [SNDB]()  
-* [PPI]()  
+* [PPI](./README_imibio_tree_ecological_data.md)  
 
 ## Base de datos
 
-![](extras/img/modeldb.png)
+> crear vision general de las bases
 
 ## Proceso de desarrollo
 
 Más al respecto del [proceso de desarrolo](./Creation_process.md)
-

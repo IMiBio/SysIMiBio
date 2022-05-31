@@ -7,18 +7,32 @@ import sysimibio.imibio_tree_ecological_data.validators
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('imibio_tree_ecological_data', '0014_auto_20210603_1022'),
+        ("imibio_tree_ecological_data", "0014_auto_20210603_1022"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='permanentparcel',
-            name='latitude',
-            field=models.FloatField(blank=True, help_text='informar en formato en grados decimales WGS84 - epsg4326', validators=[sysimibio.imibio_tree_ecological_data.validators.validate_lat], verbose_name='latitud'),
+            model_name="permanentparcel",
+            name="latitude",
+            field=models.FloatField(
+                blank=True,
+                help_text="informar en formato en grados decimales WGS84 - epsg4326",
+                validators=[
+                    sysimibio.imibio_tree_ecological_data.validators.validate_lat
+                ],
+                verbose_name="latitud",
+            ),
         ),
         migrations.AlterField(
-            model_name='permanentparcel',
-            name='longitude',
-            field=models.FloatField(blank=True, help_text='informar en formato en grados decimales WGS84 - epsg4326', validators=[sysimibio.imibio_tree_ecological_data.validators.validate_lon], verbose_name='longitud'),
+            model_name="permanentparcel",
+            name="longitude",
+            field=models.FloatField(
+                blank=True,
+                help_text="informar en formato en grados decimales WGS84 - epsg4326",
+                validators=[
+                    sysimibio.imibio_tree_ecological_data.validators.validate_lon
+                ],
+                verbose_name="longitud",
+            ),
         ),
     ]

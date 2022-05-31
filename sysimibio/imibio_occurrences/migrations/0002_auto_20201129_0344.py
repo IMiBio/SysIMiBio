@@ -6,22 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('imibio_occurrences', '0001_initial'),
+        ("imibio_occurrences", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='imibiooccurrence',
-            options={'ordering': ('-created_at',), 'verbose_name': 'Ocurrencia', 'verbose_name_plural': 'Ocorrencias'},
+            name="imibiooccurrence",
+            options={
+                "ordering": ("-created_at",),
+                "verbose_name": "Ocurrencia",
+                "verbose_name_plural": "Ocorrencias",
+            },
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='decimalLatitude',
-            field=models.FloatField(blank=True, null=True, verbose_name='Latitud'),
+            model_name="imibiooccurrence",
+            name="decimalLatitude",
+            field=models.FloatField(blank=True, null=True, verbose_name="Latitud"),
         ),
         migrations.AlterField(
-            model_name='imibiooccurrence',
-            name='decimalLongitude',
-            field=models.FloatField(blank=True, null=True, verbose_name='Longitud'),
+            model_name="imibiooccurrence",
+            name="decimalLongitude",
+            field=models.FloatField(blank=True, null=True, verbose_name="Longitud"),
         ),
     ]

@@ -6,13 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('imibio_tree_ecological_data', '0005_auto_20210212_2039'),
+        ("imibio_tree_ecological_data", "0005_auto_20210212_2039"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='tree',
-            name='sociological_classification',
-            field=models.CharField(choices=[('Emergente', 'Emergente'), ('Dominante', 'Dominante'), ('Codominante', 'Codominante'), ('Intermedia', 'Intermedia'), ('Inferior suprimido', 'Inferior Suprimido'), ('Inferior sumergido', 'Supeior Sumergido')], max_length=100, verbose_name='clasificación sociologica'),
+            model_name="tree",
+            name="sociological_classification",
+            field=models.CharField(
+                choices=[
+                    ("Emergente", "Emergente"),
+                    ("Dominante", "Dominante"),
+                    ("Codominante", "Codominante"),
+                    ("Intermedia", "Intermedia"),
+                    ("Inferior suprimido", "Inferior Suprimido"),
+                    ("Inferior sumergido", "Supeior Sumergido"),
+                ],
+                max_length=100,
+                verbose_name="clasificación sociologica",
+            ),
         ),
     ]

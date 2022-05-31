@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+<div class="col-md-8">
+    {% if user.is_authenticated %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        <p>{{ message }}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="row">
+        <h2>Lista Visitas de campo</h2>
+    </div>
+    {% if object_list %}
+    <table class='table table-striped'>
+        <thead>
+        <tr>
+            <th>Parcela</th>
+            <th>Fecha</th>
+            <th>Inicio</th>
+            <th>Fin</th>
+            <th>Coordinador</th>
+            <th>Apoyo</th>
+
+        </tr>
+        </thead>
+
+        {% for object in object_list %}
+        <tr>
+            <td>
+                <a href="{{ object.get_absolute_url }}">{{ object.parcel_id }}</a>
+            </td>
+            <td>{{ object.date }}</td>
+            <td>{{ object.start_time }}</td>
+            <td>{{ object.end_time }}</td>
+            <td>{{ object.coordinator }}</td>
+            <td>{{ object.staff.all|join:", " }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p class="alert alert-warning">
+        <i class="fa fa-warning"></i> Base de datos sin registros!</p>
+    {% endif %}
+</div>
+{% else %}
+<div class="alert alert-danger" role="alert">
+    Acceso negado. Logar o crear usuário.
+</div>
+
+{% endif %}
+{% endblock %}

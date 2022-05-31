@@ -7,31 +7,63 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('imibio_tree_ecological_data', '0004_auto_20210212_2014'),
+        ("imibio_tree_ecological_data", "0004_auto_20210212_2014"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='treeecologicaldata',
-            options={'ordering': ('-date',), 'verbose_name': 'Campo', 'verbose_name_plural': 'Registro de campo'},
+            name="treeecologicaldata",
+            options={
+                "ordering": ("-date",),
+                "verbose_name": "Campo",
+                "verbose_name_plural": "Registro de campo",
+            },
         ),
         migrations.CreateModel(
-            name='Tree',
+            name="Tree",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('tree_id', models.IntegerField(verbose_name='ID Árbol')),
-                ('specie', models.CharField(max_length=100, verbose_name='especie')),
-                ('dap', models.FloatField()),
-                ('dab', models.FloatField()),
-                ('tree_height', models.FloatField(verbose_name='Altura del árbol')),
-                ('latitude', models.FloatField(verbose_name='latitud')),
-                ('longitude', models.FloatField(verbose_name='longitud')),
-                ('photo', models.URLField(blank=True, null=True, verbose_name='fotografia')),
-                ('obs', models.TextField()),
-                ('tree_status', models.CharField(max_length=100, verbose_name='Estado del árbol')),
-                ('life_form', models.CharField(max_length=100, verbose_name='Forma de Vida')),
-                ('sociological_classification', models.CharField(max_length=100, verbose_name='clasificación sociologica')),
-                ('field', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='imibio_tree_ecological_data.treeecologicaldata')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("tree_id", models.IntegerField(verbose_name="ID Árbol")),
+                ("specie", models.CharField(max_length=100, verbose_name="especie")),
+                ("dap", models.FloatField()),
+                ("dab", models.FloatField()),
+                ("tree_height", models.FloatField(verbose_name="Altura del árbol")),
+                ("latitude", models.FloatField(verbose_name="latitud")),
+                ("longitude", models.FloatField(verbose_name="longitud")),
+                (
+                    "photo",
+                    models.URLField(blank=True, null=True, verbose_name="fotografia"),
+                ),
+                ("obs", models.TextField()),
+                (
+                    "tree_status",
+                    models.CharField(max_length=100, verbose_name="Estado del árbol"),
+                ),
+                (
+                    "life_form",
+                    models.CharField(max_length=100, verbose_name="Forma de Vida"),
+                ),
+                (
+                    "sociological_classification",
+                    models.CharField(
+                        max_length=100, verbose_name="clasificación sociologica"
+                    ),
+                ),
+                (
+                    "field",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="imibio_tree_ecological_data.treeecologicaldata",
+                    ),
+                ),
             ],
         ),
     ]

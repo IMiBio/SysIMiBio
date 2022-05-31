@@ -6,24 +6,39 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('imibio_tree_ecological_data', '0010_auto_20210322_1358'),
+        ("imibio_tree_ecological_data", "0010_auto_20210322_1358"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Pictures',
+            name="Pictures",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('picture', models.ImageField(blank=True, null=True, upload_to='', verbose_name='Fotografía')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "picture",
+                    models.ImageField(
+                        blank=True, null=True, upload_to="", verbose_name="Fotografía"
+                    ),
+                ),
             ],
         ),
         migrations.RemoveField(
-            model_name='tree',
-            name='photo',
+            model_name="tree",
+            name="photo",
         ),
         migrations.AddField(
-            model_name='tree',
-            name='picture',
-            field=models.ImageField(blank=True, null=True, upload_to='', verbose_name='Fotografía'),
+            model_name="tree",
+            name="picture",
+            field=models.ImageField(
+                blank=True, null=True, upload_to="", verbose_name="Fotografía"
+            ),
         ),
     ]

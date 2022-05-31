@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% load leaflet_tags %}
+
+{% load static %}
+
+{% block js %}
+{% leaflet_js %}
+{% endblock %}
+
+{% block css %}
+{% leaflet_css %}
+{% endblock %}
+
+{% block content %}
+<style>
+    #map-detail {
+        width: 100%;
+        height: 100%;
+    }
+
+</style>
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success" role="alert">
+    <p>{{ message }}</p>
+</div>
+{% endfor %}
+{% endif %}
+
+
+<br>
+<div class="row">
+    <a role="button" class="btn btn-success btn-lg" href="{% url 'imibio_tree_ecological_data:tree_measurement_list' %}">
+        <span class="align-middle">Lista de mediciones</span>
+    </a>
+    <a role="button" class="btn btn-warning btn-lg"
+       href="{% url 'imibio_tree_ecological_data:tree_measurement_edit' pk=object.pk %}">
+        <span class="align-middle">Editar medición</span>
+    </a>
+</div>
+<div class="row">
+
+</div>
+<h2>Detalles de la medición del Árbol: {{ object.tree.tree_id }}</h2>
+<div class="row">
+    <div class="col-sm-4">
+        <table class="table table-user-information">
+            <tbody>
+
+            <tr>
+                <th class="text-right">Campo de registro</th>
+                <td>{{ object.tree.field }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">Parcela Permanente</th>
+                <td>{{ object.tree.field.parcel_id }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">Sub Parcale</th>
+                <td>{{ object.tree.subplot }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">Numero del àrbol</th>
+                <td>{{ object.tree.tree_number }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">Nombre de la especie</th>
+                <td>{{ object.tree.specie }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">Observaciones del árbol</th>
+                <td>{{ object.tree.obs|linebreaks }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">DAP</th>
+                <td>{{ object.dap }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">DAB</th>
+                <td>{{ object.dab }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">Altura del árbol</th>
+                <td>{{ object.tree_height }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">Clasificación fitosanitaria</th>
+                <td>{{ object.phytosanitary_status }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">Clasificación sociologica</th>
+                <td>{{ object.sociological_classification }}</td>
+            </tr>
+
+            <tr>
+                <th class="text-right">Observaciones de la medición</th>
+                <td>{{ object.obs|linebreaks }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="col-sm-8">
+        <div id="map-detail">
+            {% leaflet_map "map-detail" %}
+        </div>
+    </div>
+</div>
+<script>
+    var dataurl = '{% url "imibio_tree_ecological_data:plot_detail_geojson" pk=object.tree.field.parcel_id.pk %}';
+      window.addEventListener("map:init", function (event) {
+        var map = event.detail.map;
+        // Download GeoJSON data with Ajax
+        fetch(dataurl)
+          .then(function(resp) {
+            return resp.json();
+          })
+          .then(function(data) {
+            L.geoJson(data, {
+              onEachFeature: function onEachFeature(feature, layer) {
+                var props = feature.properties.popup_content;
+                layer.bindPopup(props);
+            }}).addTo(map);
+          });
+      });
+      var TreeDataURL = '{% url "imibio_tree_ecological_data:Tree_detail_geojson" pk=object.tree.pk %}';
+      window.addEventListener("map:init", function (event) {
+        var map = event.detail.map;
+        fetch(TreeDataURL)
+          .then(function(resp) {
+            return resp.json();
+          })
+          .then(function(data) {
+            jsonLayer = L.geoJson(data, {
+              onEachFeature: function onEachFeature(feature, layer) {
+                var props = feature.properties.popup_content;
+                layer.bindPopup(props);
+            }}).addTo(map);
+            map.fitBounds(jsonLayer.getBounds(), { maxZoom: 15 });
+          });
+      });
+
+</script>
+
+
+{% endblock content %}

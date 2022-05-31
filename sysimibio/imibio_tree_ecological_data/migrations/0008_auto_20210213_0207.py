@@ -9,13 +9,18 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('imibio_tree_ecological_data', '0007_auto_20210213_0159'),
+        ("imibio_tree_ecological_data", "0007_auto_20210213_0159"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='treeecologicaldata',
-            name='coordinator',
-            field=models.ForeignKey(max_length=100, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='responsable'),
+            model_name="treeecologicaldata",
+            name="coordinator",
+            field=models.ForeignKey(
+                max_length=100,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="responsable",
+            ),
         ),
     ]
